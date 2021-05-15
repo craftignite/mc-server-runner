@@ -1,7 +1,7 @@
 package cfsync_test
 
 import (
-	"github.com/itzg/mc-server-runner/cfsync"
+	"github.com/craftignite/mc-server-runner/cfsync"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"go.uber.org/zap"
