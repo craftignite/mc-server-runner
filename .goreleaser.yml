@@ -1,7 +1,7 @@
 project_name: mc-server-runner
 release:
   github:
-    owner: itzg
+    owner: craftignite
     name: mc-server-runner
 brews:
   - install: |

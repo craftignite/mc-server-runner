@@ -1,4 +1,4 @@
-module github.com/itzg/mc-server-runner
+module github.com/craftignite/mc-server-runner
 
 go 1.13
 

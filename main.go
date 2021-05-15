@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/itzg/go-flagsfiller"
-	"github.com/itzg/mc-server-runner/cfsync"
+	"github.com/craftignite/mc-server-runner/cfsync"
 	"github.com/itzg/zapconfigs"
 	"go.uber.org/zap"
 	"io"

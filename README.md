@@ -1,10 +1,9 @@
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/itzg/mc-server-runner)](https://github.com/itzg/mc-server-runner/releases/latest)
-[![CircleCI](https://img.shields.io/circleci/build/github/itzg/mc-server-runner)](https://app.circleci.com/pipelines/github/itzg/mc-server-runner/)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/craftignite/mc-server-runner)](https://github.com/craftignite/mc-server-runner/releases/latest)
+[![CircleCI](https://img.shields.io/circleci/build/github/craftignite/mc-server-runner)](https://app.circleci.com/pipelines/github/craftignite/mc-server-runner/)
 
-
-This is a process wrapper used by 
-[the itzg/minecraft-server Docker image](https://hub.docker.com/r/itzg/minecraft-server/)
-to ensure the Minecraft server is stopped gracefully when the container is sent the `TERM` signal.
+This is a modified version of the Minecraft server process wrapper used by 
+[the itzg/minecraft-server Docker image](https://hub.docker.com/r/itzg/minecraft-server/). It is modified to work with [the craftignite auto-start-stop Minecraft server](https://github.com/craftignite/).
+It is designed to handle some startup tasks as well as ensure the Minecraft server is stopped gracefully when the container is sent the `TERM` signal.
 
 ## Usage
 
