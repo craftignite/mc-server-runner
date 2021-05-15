@@ -11,7 +11,7 @@ jobs:
     steps:
       - checkout
       - go/load-cache
-      - go/test
+#      - go/test
       - go/save-cache
 
   release:
