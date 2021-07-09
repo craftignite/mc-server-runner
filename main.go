@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/itzg/go-flagsfiller"
 	"github.com/craftignite/mc-server-runner/cfsync"
+	"github.com/itzg/go-flagsfiller"
 	"github.com/itzg/zapconfigs"
 	"go.uber.org/zap"
 	"io"
@@ -27,6 +27,24 @@ type Args struct {
 	Cf           struct {
 		InstanceFile string `usage:"Path to a Twitch/Curse minecraftinstance.json file for server setup"`
 	}
+}
+
+// Generate the command that wraps the server command in craftignite's supervisor
+func genCommand(shell string, server string, args []string) *exec.Cmd {
+	var outArgs []string
+
+	if shell != "" {
+		outArgs = append(outArgs, shell)
+	}
+
+	outArgs = append(outArgs, server)
+	outArgs = append(outArgs, args...)
+
+	wrapperName := os.Getenv("CRAFTIGNITE_NAME")
+	if wrapperName == "" {
+		log.Fatal("Environment variable CRAFTIGNITE_NAME not specified")
+	}
+	return exec.Command(wrapperName, outArgs...)
 }
 
 func main() {
@@ -61,18 +79,14 @@ func main() {
 			logger.Fatal("Failed to prepare instance", zap.Error(err))
 		}
 
-		args, err := fillServerJar(flag.Args()[1:], serverJar)
+		serverArgs, err := fillServerJar(flag.Args()[1:], serverJar)
 		if err != nil {
 			logger.Fatal("Invalid arguments", zap.Error(err))
 		}
 
-		cmd = exec.Command(flag.Arg(0), args...)
+		cmd = genCommand(args.Shell, flag.Arg(0), serverArgs)
 	} else {
-		if args.Shell != "" {
-			cmd = exec.Command(args.Shell, flag.Args()...)
-		} else {
-			cmd = exec.Command(flag.Arg(0), flag.Args()[1:]...)
-		}
+		cmd = genCommand(args.Shell, flag.Arg(0), flag.Args()[1:])
 	}
 
 	stdin, err := cmd.StdinPipe()
